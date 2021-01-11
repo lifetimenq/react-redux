@@ -1,25 +1,29 @@
-import logo from './logo.svg';
+import React from 'react';
+import store from './Redux/store';
 import './App.css';
+import { Provider } from 'react-redux'
+
+import ChapterList from './Components/ChapterList';
+import Filter from './Components/Filter';
+import Statistics from './Components/Statistics';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <div className="App">
+        <div className="content">
+          <div className='book-content'>
+            Содержание книги
+          </div>
+          <Filter />
+          <ChapterList />
+          <Statistics />
+        </div>
+      </div>
+    </Provider>
   );
 }
 
 export default App;
+
