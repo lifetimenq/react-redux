@@ -1,5 +1,5 @@
 
-const Statistics = ({ ownProps : {allChapters, percent}}) => {
+const Statistics = ({ allChapters, percent }) => {
   return (
     <div className="statistics">
       <div >
