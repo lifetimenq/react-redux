@@ -45,13 +45,13 @@ const initialState = {
   ]
 };
 
-function updateChapter(state, chapterData, chapterId) {
+function updateChapter(state, chapterId) {
 
   let chapterComplete = state.subChapters
   .filter((element) => (element.chapterId === chapterId))
   .every((subChapter) => (subChapter.completed));
-
-  return {...state, chapters: chapterData.chapters.map(
+  
+  return {...state, chapters: state.chapters.map(
       (chapter) => (
         chapter.id === chapterId
           ? { ...chapter, completed: chapterComplete }
@@ -84,7 +84,7 @@ export const content = function(state = initialState, action) {
         )
       };
 
-      return updateChapter(newState, state, action.chapterId);
+      return updateChapter(newState, action.chapterId);
 
     case 'TOGGLE_SUBCHAPTER':
       const toggleState = {...state, subChapters: state.subChapters.map(
@@ -96,7 +96,7 @@ export const content = function(state = initialState, action) {
         )
       };
 
-      return updateChapter(toggleState, state, action.chapterId);
+      return updateChapter(toggleState, action.chapterId);
     default:
       return state;
   }
