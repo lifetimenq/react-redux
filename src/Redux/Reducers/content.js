@@ -74,7 +74,7 @@ export const content = function(state = initialState, action) {
         )
       };
     case 'ADD_SUBCHAPTER':
-      const new_state = {...state, subChapters: state.subChapters.concat(
+      const newState = {...state, subChapters: state.subChapters.concat(
           {
             id: Date.now(),
             chapterId: action.chapterId,
@@ -84,10 +84,10 @@ export const content = function(state = initialState, action) {
         )
       };
 
-      return updateChapter(new_state, state, action);
+      return updateChapter(newState, state, action);
 
     case 'TOGGLE_SUBCHAPTER':
-      const toggle_state = {...state, subChapters: state.subChapters.map(
+      const toggleState = {...state, subChapters: state.subChapters.map(
           (subChapter) => (
             subChapter.id === action.id
               ? { ...subChapter, completed: !subChapter.completed }
@@ -96,7 +96,7 @@ export const content = function(state = initialState, action) {
         )
       };
 
-      return updateChapter(toggle_state, state, action);
+      return updateChapter(toggleState, state, action);
     default:
       return state;
   }
