@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  width: 50%;
+  margin: auto;
+  max-width: 500px;
 }
 
 .App-logo {
@@ -35,4 +38,109 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.chapter-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+}
+
+.sub-chapter-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  margin-left: 30px;
+}
+
+.book-content {
+  font-size: x-large;
+  text-align: center;
+  padding: 1rem;
+}
+
+.content {
+  margin-top: 20px;
+}
+
+.filter-button {
+  margin: 1px;
+  transition-duration: 0.4s;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  background-color: white;
+  color: black;
+  border: 2px solid #a9aca9;
+  border-radius: 4px;
+}
+
+.filter-button:hover {
+  background-color: #a5aca6;
+  color: white;
+}
+
+.filter-button-selected {
+  border: 2px solid #000000;
+}
+
+.filters {
+  margin-bottom: 15px;
+}
+
+.chapter-title {
+  font-size: large;
+  font-weight: 600;
+}
+
+.chapter-add {
+  margin-top: 16px;
+}
+
+.chapter-add button {
+  margin-left: 8px;
+  padding: 4px 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  background-color: white;
+  color: black;
+  border: 2px solid #a9aca9;
+  border-radius: 4px;
+}
+
+.chapter-add input {
+  padding: 4px 8px;
+  font-size: 14px;
+}
+
+.sub-chapter-add {
+  margin-top: 8px;
+}
+
+.sub-chapter-add button {
+  margin-left: 8px;
+  padding: 4px 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  background-color: white;
+  color: black;
+  border: 2px solid #a9aca9;
+  border-radius: 4px;
+}
+
+.sub-chapter-add input {
+  padding: 4px 8px;
+  font-size: 12px;
+}
+
+.statistics {
+  margin: 10px;
 }
