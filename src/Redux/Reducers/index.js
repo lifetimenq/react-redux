@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
-import { filters } from './filters';
-import { content } from './content'; 
+import filters from './slices/filters';
+import content from './slices/content'; 
 
 export default combineReducers(
   {

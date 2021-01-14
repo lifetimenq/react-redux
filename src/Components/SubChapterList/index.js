@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 
 import SubChapterList from './SubChapterList';
+import { addSubChapter, toggleSubChapter} from '../../Redux/Reducers/slices/content';
 
 const filters = {
   SHOW_ALL: () => true,
@@ -19,16 +20,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  addSubchapter: (chapterId, title) => dispatch({
-    type: 'ADD_SUBCHAPTER',
-    title,
-    chapterId
-  }),
-  toggleSubChapter: (id, chapterId) => dispatch({
-    type: 'TOGGLE_SUBCHAPTER',
-    id,
-    chapterId
-  })
+  addSubChapter: (payload) => dispatch(addSubChapter(payload)),
+  toggleSubChapter: (payload) => dispatch(toggleSubChapter(payload))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SubChapterList);

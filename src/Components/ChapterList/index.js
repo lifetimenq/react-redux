@@ -2,6 +2,8 @@ import { connect } from 'react-redux';
 
 import ChapterList from './ChapterList';
 
+import { addChapter } from '../../Redux/Reducers/slices/content'
+
 const filtersSubChapter = {
   SHOW_ALL: () => true,
   SHOW_COMPLETED: (chapter) => chapter.completed,
@@ -35,11 +37,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  addChapter: (title, id) => dispatch({
-    type: 'ADD_CHAPTER',
-    id,
-    title
-  })
+  addChapter: (title) => dispatch(addChapter(title))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChapterList);
