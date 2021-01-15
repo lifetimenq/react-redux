@@ -3,11 +3,15 @@ import SubChapterList from '../SubChapterList';
 
 
 const ChapterList = ( { content, addChapter } ) => {
-  const { chapters } = content
+
+  if(content.isLoading) {
+    return <div>Загрузка...</div>
+  }
+
   return (
   <div className="chapter-list">
     {
-      chapters.map(
+      content.entries.chapters.map(
         (chapter) => (
           <label key={chapter.id}>
             <input type="checkbox" checked={chapter.completed} onChange={()=>(true)} />

@@ -3,10 +3,10 @@ const Statistics = ({ allChapters, percent }) => {
   return (
     <div className="statistics">
       <div >
-        количество разделов: {allChapters} 
+        количество разделов: {allChapters ?? 0}
       </div>
       <div>
-        процент готовности: {percent}
+        процент готовности: {percent ?? 0}
       </div>
       </div>
   )

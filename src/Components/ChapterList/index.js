@@ -11,7 +11,10 @@ const filtersSubChapter = {
 };
 
 const mapStateToProps = (state) => {
-  let chs = state.content.chapters.filter((ch) => {
+
+  if (state.content.isLoading) return state;
+  
+  let chs = state.content.entries.chapters.filter((ch) => {
     if (state.filters === 'SHOW_ALL')
       return true
     if (state.filters === 'SHOW_UNCOMPLETED')
@@ -19,7 +22,7 @@ const mapStateToProps = (state) => {
     if (state.filters === 'SHOW_COMPLETED') {
       if(ch.completed)
         return true
-      return state.content.subChapters.some((sch) => {
+      return state.content.entries.subChapters.some((sch) => {
         if (ch.id === sch.chapterId) {
           return sch.completed;
         }
@@ -30,10 +33,14 @@ const mapStateToProps = (state) => {
   return {
     ...state,
     content: {
-      chapters: chs,
-      subChapters: state.content.subChapters.filter(filtersSubChapter[state.filters])
+      ...state.content,
+      entries: {
+        chapters: chs,
+        subChapters: state.content.entries.subChapters.filter(filtersSubChapter[state.filters])
+      }
     }
   };
+
 };
 
 const mapDispatchToProps = (dispatch) => ({

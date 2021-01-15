@@ -1,60 +1,36 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 
-const initialState = {
-  chapters: [
-    {
-      id:  1,
-      title: 'Глава 1',
-      completed: false
-    },
-    {
-      id:  2,
-      title: 'Глава 2',
-      completed: false
-    },
-    {
-      id:  3,
-      title: 'Глава 3',
-      completed: true
-    }
-  ],
-  subChapters: [
-    {
-      id:  1,
-      chapterId: 1,
-      title: 'подглава 1',
-      completed: false,
-      
-    },
-    {
-      id:  2,
-      chapterId: 1,
-      title: 'подглава 2',
-      completed: false
-    },
-    {
-      id:  3,
-      chapterId: 2,
-      title: 'интересная подглава 2',
-      completed: false
-    },
-    {
-      id:  4,
-      chapterId: 3,
-      title: 'подглава 1',
-      completed: true,
-    }
-  ]
+const initialState = { 
+  isLoading: false,
+  isError: false,
+  error: null,
+  entries: null
 };
 
 
 const updateChapter = (state, action) => {
-  const chapter = state.chapters.find(chapter => chapter.id === action.payload.chapterId);
+  const chapter = state.entries.chapters.find(chapter => chapter.id === action.payload.chapterId);
 
-  chapter.completed = state.subChapters
+  chapter.completed = state.entries.subChapters
     .filter((element) => (element.chapterId === action.payload.chapterId))
     .every((subChapter) => (subChapter.completed));
 }
+
+export const fetchContent = createAsyncThunk(
+  'content/fetchAll',
+  async () => {
+    const response = await axios({
+      url: 'https://content-ec98.restdb.io/rest/content',
+      method: 'GET',
+      headers: {
+        'x-apikey': '60012c8e1346a1524ff12a60'
+      }
+    })
+
+    return response.data[0].content;
+  }
+)
 
 const contentSlice = createSlice({
   name: 'content',
@@ -62,7 +38,7 @@ const contentSlice = createSlice({
   reducers:
   {
     addChapter(state, action){
-      state.chapters.push(
+      state.entries.chapters.push(
         {
           id: Date.now(),
           title: action.payload, 
@@ -71,7 +47,7 @@ const contentSlice = createSlice({
       )
     },
     addSubChapter(state, action){
-      state.subChapters.push(
+      state.entries.subChapters.push(
         {
           id: Date.now(),
           chapterId: action.payload.chapterId,
@@ -84,12 +60,28 @@ const contentSlice = createSlice({
     },
     toggleSubChapter(state, action){
 
-      const subChapter = state.subChapters.find(subChapter => subChapter.id === action.payload.id)
+      const subChapter = state.entries.subChapters.find(subChapter => subChapter.id === action.payload.id)
       if (subChapter) {
         subChapter.completed = !subChapter.completed
       }
       
       updateChapter(state, action);
+    }
+  },
+  extraReducers: {
+    [fetchContent.pending]: (state, action) => {
+
+      return {
+        ...state,
+        isLoading: true
+      }
+    },
+    [fetchContent.fulfilled]: (state, action) => {
+
+      return {
+        ...initialState,
+        entries: action.payload
+      }
     }
   }
 });
