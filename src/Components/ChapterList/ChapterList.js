@@ -2,16 +2,16 @@ import React from 'react';
 import SubChapterList from '../SubChapterList';
 
 
-const ChapterList = ( { content, addChapter } ) => {
+const ChapterList = ( { content, addChapter, undo, redo } ) => {
 
-  if(content.isLoading) {
+  if(content.present.isLoading) {
     return <div>Загрузка...</div>
   }
 
   return (
   <div className="chapter-list">
     {
-      content.entries.chapters.map(
+      content.present.entries.chapters.map(
         (chapter) => (
           <label key={chapter.id}>
             <input type="checkbox" checked={chapter.completed} onChange={()=>(true)} />
@@ -39,6 +39,20 @@ const ChapterList = ( { content, addChapter } ) => {
         <button>Добавить Главу</button>
       </div>
     </form>
+    <div className="control-block">
+        <button 
+          className="undo-button"
+          onClick={() => {undo()}}
+        >
+          Undo
+        </button>
+        <button 
+          className="undo-button"
+          onClick={() => {redo()}}
+        >
+          Redo
+        </button>
+      </div>
   </div>
 )};
 
