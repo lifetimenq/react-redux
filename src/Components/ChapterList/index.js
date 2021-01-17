@@ -13,9 +13,13 @@ const filtersSubChapter = {
 
 const mapStateToProps = (state) => {
 
-  if (state.content.present.isLoading) return state;
+  if (state.content.present.isLoading) 
+    return {
+      isLoading: state.content.present.isLoading,
+      chapters: []
+    };
   
-  let chs = state.content.present.entries.chapters.filter((ch) => {
+  const chs = state.content.present.entries.chapters.filter((ch) => {
     if (state.filters === 'SHOW_ALL')
       return true
     if (state.filters === 'SHOW_UNCOMPLETED')
@@ -32,18 +36,9 @@ const mapStateToProps = (state) => {
   })
 
   return {
-    ...state,
-    content: {
-      ...state.content,
-      present: {
-        ...state.content.present,
-        entries: {
-          chapters: chs,
-          subChapters: state.content.present.entries.subChapters.filter(filtersSubChapter[state.filters])
-        }
-      }
-    }
-  };
+    isLoading: state.content.present.isLoading,
+    chapters: chs
+  }
 
 };
 
