@@ -1,8 +1,8 @@
 import React from 'react';
 
 
-const ChapterList = ( { content, chapterId, addSubChapter, toggleSubChapter } ) => {
-  const { subChapters } = content
+const ChapterList = ( { subChapters, chapterId, addSubChapter, toggleSubChapter } ) => {
+
   return (
   <div className="sub-chapter-list">
     {
