@@ -13,13 +13,6 @@ const mapStateToProps = (state) => {
   return {
     subChapters: state.content.present.entries.subChapters.filter(filters[state.filters])
   };
-  return {
-    ...state,
-    content: {
-      chapters: state.content.present.entries.chapters.filter(filters[state.filters]),
-      subChapters: state.content.present.entries.subChapters.filter(filters[state.filters])
-    }
-  }; 
 };
 
 const mapDispatchToProps = (dispatch) => ({
