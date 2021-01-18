@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux';
 
-import { filters } from './filters';
-import { content } from './content'; 
+import filters from './slices/filters';
+import content from './slices/content'; 
+
+import undoable from 'redux-undo';
 
 export default combineReducers(
   {
-    content,
+    content: undoable(content),
     filters
   }
 );

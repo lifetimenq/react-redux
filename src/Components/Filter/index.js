@@ -1,13 +1,11 @@
 import { connect } from 'react-redux';
 
 import Filter from './Filter';
+import { setFilter } from '../../Redux/Reducers/slices/filters'
 
 const mapDispatchToProps = (dispatch) => (
   {
-    setFilter: (filter) => dispatch({
-    type: 'SET_FILTER',
-    filter
-    })
+    setFilter: (payload) => dispatch(setFilter(payload))
 });
 
 const mapStateToProps = (state) => {

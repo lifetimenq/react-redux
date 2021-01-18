@@ -1,6 +1,9 @@
 import { connect } from 'react-redux';
+import { ActionCreators } from 'redux-undo'
 
 import ChapterList from './ChapterList';
+
+import { addChapter } from '../../Redux/Reducers/slices/content'
 
 const filtersSubChapter = {
   SHOW_ALL: () => true,
@@ -9,7 +12,14 @@ const filtersSubChapter = {
 };
 
 const mapStateToProps = (state) => {
-  let chs = state.content.chapters.filter((ch) => {
+
+  if (state.content.present.isLoading) 
+    return {
+      isLoading: state.content.present.isLoading,
+      chapters: []
+    };
+  
+  const chs = state.content.present.entries.chapters.filter((ch) => {
     if (state.filters === 'SHOW_ALL')
       return true
     if (state.filters === 'SHOW_UNCOMPLETED')
@@ -17,7 +27,7 @@ const mapStateToProps = (state) => {
     if (state.filters === 'SHOW_COMPLETED') {
       if(ch.completed)
         return true
-      return state.content.subChapters.some((sch) => {
+      return state.content.present.entries.subChapters.some((sch) => {
         if (ch.id === sch.chapterId) {
           return sch.completed;
         }
@@ -26,20 +36,16 @@ const mapStateToProps = (state) => {
   })
 
   return {
-    ...state,
-    content: {
-      chapters: chs,
-      subChapters: state.content.subChapters.filter(filtersSubChapter[state.filters])
-    }
-  };
+    isLoading: state.content.present.isLoading,
+    chapters: chs
+  }
+
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  addChapter: (title, id) => dispatch({
-    type: 'ADD_CHAPTER',
-    id,
-    title
-  })
+  addChapter: (title) => dispatch(addChapter(title)),
+  undo: () => dispatch(ActionCreators.undo()),
+  redo: () => dispatch(ActionCreators.redo())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChapterList);

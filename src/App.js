@@ -6,7 +6,9 @@ import { Provider } from 'react-redux'
 import ChapterList from './Components/ChapterList';
 import Filter from './Components/Filter';
 import Statistics from './Components/Statistics';
+import { fetchContent } from './Redux/Reducers/slices/content';
 
+store.dispatch(fetchContent());
 
 function App() {
   return (

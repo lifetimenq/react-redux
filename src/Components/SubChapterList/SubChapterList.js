@@ -1,8 +1,8 @@
 import React from 'react';
 
 
-const ChapterList = ( { content, chapterId, addSubchapter, toggleSubChapter } ) => {
-  const { subChapters } = content
+const ChapterList = ( { subChapters, chapterId, addSubChapter, toggleSubChapter } ) => {
+
   return (
   <div className="sub-chapter-list">
     {
@@ -12,7 +12,7 @@ const ChapterList = ( { content, chapterId, addSubchapter, toggleSubChapter } ) 
             return (
               <label key={subChapter.id}>
                 <input 
-                  onChange={() => toggleSubChapter(subChapter.id, chapterId)}
+                  onChange={() => toggleSubChapter({id: subChapter.id, chapterId})}
                   type="checkbox"
                   checked={subChapter.completed}
                 />
@@ -30,7 +30,7 @@ const ChapterList = ( { content, chapterId, addSubchapter, toggleSubChapter } ) 
           if(!e.target.title.value.trim()) {
             return
           }
-          addSubchapter(chapterId, e.target.title.value);
+          addSubChapter({chapterId, title: e.target.title.value});
           e.target.title.value = '';
         }
       }

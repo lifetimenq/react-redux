@@ -2,8 +2,12 @@ import React from 'react';
 import SubChapterList from '../SubChapterList';
 
 
-const ChapterList = ( { content, addChapter } ) => {
-  const { chapters } = content
+const ChapterList = ( { isLoading, chapters, addChapter, undo, redo } ) => {
+
+  if(isLoading) {
+    return <div>Загрузка...</div>
+  }
+
   return (
   <div className="chapter-list">
     {
@@ -35,6 +39,20 @@ const ChapterList = ( { content, addChapter } ) => {
         <button>Добавить Главу</button>
       </div>
     </form>
+    <div className="control-block">
+        <button 
+          className="undo-button"
+          onClick={() => {undo()}}
+        >
+          Undo
+        </button>
+        <button 
+          className="undo-button"
+          onClick={() => {redo()}}
+        >
+          Redo
+        </button>
+      </div>
   </div>
 )};
 
