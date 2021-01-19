@@ -35,7 +35,7 @@ const ChapterList = ({ isLoading, chapters, addChapter, undo, redo } ) => {
       }
     >
       <div className="chapter-add">
-        <input type="text" name="title" />
+        <input id="chapter" type="text" name="title" />
         <button>Добавить Главу</button>
       </div>
     </form>
