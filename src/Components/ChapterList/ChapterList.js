@@ -2,7 +2,7 @@ import React from 'react';
 import SubChapterList from '../SubChapterList';
 
 
-const ChapterList = ( { isLoading, chapters, addChapter, undo, redo } ) => {
+const ChapterList = ({ isLoading, chapters, addChapter, undo, redo } ) => {
 
   if(isLoading) {
     return <div>Загрузка...</div>
