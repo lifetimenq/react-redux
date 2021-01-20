@@ -1,4 +1,4 @@
-
+import React from 'react';
 const Statistics = ({ allChapters, percent }) => {
   return (
     <div className="statistics">
@@ -8,7 +8,7 @@ const Statistics = ({ allChapters, percent }) => {
       <div>
         процент готовности: {percent ?? 0}
       </div>
-      </div>
+    </div>  
   )
 }
 
