@@ -10,7 +10,7 @@ const ChapterList = ( { subChapters, chapterId, addSubChapter, toggleSubChapter 
         (subChapter) => {
           if (chapterId === subChapter.chapterId)
             return (
-              <label key={subChapter.id}>
+              <label className="sub-chapter" key={subChapter.id}>
                 <input 
                   onChange={() => toggleSubChapter({id: subChapter.id, chapterId})}
                   type="checkbox"
@@ -36,8 +36,8 @@ const ChapterList = ( { subChapters, chapterId, addSubChapter, toggleSubChapter 
       }
     >
       <div className="sub-chapter-add">
-        <input type="text" name="title" />
-        <button>Добавить подраздел</button>
+        <input id={`subChapter-${chapterId}`} type="text" name="title" />
+        <button id={`subChapter-add-${chapterId}`}>Добавить подраздел</button>
       </div>
     </form>
   </div>
